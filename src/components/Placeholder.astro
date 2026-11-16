@@ -1,0 +1,5 @@
+---
+interface Props { label: string; dark?: boolean; class?: string; }
+const { label, dark = false, class: className = '' } = Astro.props;
+---
+<div class:list={['photo-placeholder', { dark }, className]} role="img" aria-label={label} data-photo-slot={label}><span class="photo-corner top"></span><span class="photo-corner bottom"></span><div class="placeholder-caption"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="5" width="24" height="22" rx="1" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="m5 24 8-8 5 5 4-4 6 6" stroke="currentColor" stroke-width="1.2"/></svg><span>{label}</span><small>MIEJSCE NA FOTOGRAFIĘ</small></div></div>
