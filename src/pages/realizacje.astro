@@ -1,11 +1,69 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Placeholder from '../components/Placeholder.astro';
+import ServicePhoto from '../components/ServicePhoto.astro';
 import CTA from '../components/CTA.astro';
 import { categories } from '../data/services';
+import { projects } from '../data/projects';
+import GalleryLightbox from '../components/GalleryLightbox.astro';
 ---
-<Layout title="Realizacje — galeria prac A2BUD | Warszawa" description="Miejsce na przyszłą galerię realizacji A2BUD: mieszkania, domy, łazienki, biura, posadzki i prace budowlane."><section class="page-intro container"><p class="eyebrow">A2BUD / REALIZACJE</p><h1>Przestrzenie.<br/>Materiały. Detale<span class="accent">.</span></h1><p>Przygotowujemy galerię naszych prac. Widoczne poniżej karty są miejscami na przyszłe realizacje, a nie prezentacją ukończonych projektów.</p></section><section class="section muted"><div class="container"><div class="filters" role="group" aria-label="Filtruj kategorie realizacji">{['Wszystkie', ...categories].map((name, i) => <button data-filter={i === 0 ? 'all' : name} aria-pressed={i === 0}>{name}</button>)}</div><p id="gallery-count" class="portfolio-note" aria-live="polite">5 miejsc na przyszłe realizacje</p><div class="project-grid">{categories.map((category, i) => <article class="project-card" data-category={category}><Placeholder label={`Zdjęcie realizacji 0${i + 1} — ${category}`}/><div class="project-body"><p class="eyebrow">{category}</p><h2>Nazwa realizacji — do uzupełnienia</h2><p class="project-location">Lokalizacja — do uzupełnienia</p><p>Miejsce na opis zakresu wykonanych prac, zastosowanych materiałów i rozwiązań.</p><details><summary>Dodatkowe zdjęcia <span>+</span></summary><div class="additional-photos"><Placeholder label={`Realizacja 0${i + 1} — przed pracami`}/><Placeholder label={`Realizacja 0${i + 1} — po pracach`}/></div></details></div></article>)}</div></div></section><CTA/></Layout>
+<Layout title="Realizacje — galeria prac A2BUD | Warszawa" description="Zobacz zdjęcia wnętrz i prac budowlanych: mieszkania, kuchnie, łazienki, przestrzenie użytkowe, podłogi, glazura i budowa domów.">
+  <section class="page-intro container">
+    <p class="eyebrow">A2BUD / REALIZACJE</p>
+    <h1>Przestrzenie.<br/>Materiały. Detale<span class="accent">.</span></h1>
+    <p>Od prac budowlanych po wykończone wnętrza. Poznaj detale naszych prac i wybierz kategorię, która Cię interesuje.</p>
+  </section>
+  <section class="section muted">
+    <div class="container">
+      <div class="filters" role="group" aria-label="Filtruj kategorie realizacji">
+        {['Wszystkie', ...categories].map((name, i) => <button type="button" data-filter={i === 0 ? 'all' : name} aria-pressed={i === 0} aria-controls="projects-gallery">{name}</button>)}
+      </div>
+      <p id="gallery-count" class="portfolio-note" aria-live="polite">Widoczne pozycje: {projects.length}</p>
+      <div class="project-grid" id="projects-gallery">
+        {projects.map(project => <article class="project-card" data-categories={JSON.stringify(project.categories)}>
+          <a class="project-photo-link" href={project.images[0].src} data-lightbox data-title={project.title} aria-haspopup="dialog" aria-label={`Powiększ zdjęcie: ${project.title}`}>
+            <ServicePhoto image={project.images[0]} />
+            <span class="photo-open" aria-hidden="true">Powiększ ↗</span>
+          </a>
+          <div class="project-body">
+            <p class="eyebrow">{project.categories.join(' / ')}</p>
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+            {project.images.length > 1 && <details>
+              <summary>Dodatkowe zdjęcia ({project.images.length - 1}) <span>+</span></summary>
+              <div class="additional-photos">
+                {project.images.slice(1).map(image => <a href={image.src} data-lightbox data-title={project.title} aria-haspopup="dialog" aria-label={`Powiększ zdjęcie: ${image.alt}`}><ServicePhoto image={image} /></a>)}
+              </div>
+            </details>}
+          </div>
+        </article>)}
+      </div>
+    </div>
+  </section>
+  <CTA/>
+  <GalleryLightbox/>
+</Layout>
 <script>
 const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
-buttons.forEach(button => button.addEventListener('click', () => { let count = 0; buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button))); document.querySelectorAll<HTMLElement>('[data-category]').forEach(card => { card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter; if (!card.hidden) count++; }); const status = document.querySelector('#gallery-count'); if(status) status.textContent = count === 1 ? '1 miejsce na przyszłą realizację' : `${count} miejsc na przyszłe realizacje`; }));
+const cards = document.querySelectorAll<HTMLElement>('[data-categories]');
+buttons.forEach(button => button.addEventListener('click', () => {
+  let count = 0;
+  buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  cards.forEach(card => {
+    const categories: string[] = JSON.parse(card.dataset.categories || '[]');
+    card.hidden = button.dataset.filter !== 'all' && !categories.includes(button.dataset.filter || '');
+    if (!card.hidden) count++;
+  });
+  const status = document.querySelector('#gallery-count');
+  if (status) status.textContent = `Widoczne pozycje: ${count}`;
+}));
 </script>
+<style>
+.project-photo-link { display:block; position:relative; }
+.project-photo-link :global(.service-photo) { aspect-ratio:1.7; border:0; border-bottom:1px solid var(--line); }
+.photo-open { position:absolute; right:16px; bottom:16px; background:var(--ink); color:white; padding:9px 13px; font-size:10px; }
+.project-photo-link:hover .photo-open { background:var(--accent-dark); }
+.additional-photos a { display:block; }
+.additional-photos :global(.service-photo) { aspect-ratio:4/3; }
+.additional-photos :global(img) { object-fit:contain; }
+.project-body .eyebrow { line-height:1.8; }
+</style>
