@@ -1,0 +1,43 @@
+<script is:inline>
+(() => {
+  const key = 'a2bud-consent-v1';
+  const lifetime = 180 * 24 * 60 * 60 * 1000;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+  const signals = choice => ({
+    analytics_storage: choice.analytics ? 'granted' : 'denied',
+    ad_storage: choice.marketing ? 'granted' : 'denied',
+    ad_user_data: choice.marketing ? 'granted' : 'denied',
+    ad_personalization: choice.marketing ? 'granted' : 'denied',
+  });
+  const read = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key));
+      if (value && value.version === 1 && typeof value.analytics === 'boolean' &&
+          typeof value.marketing === 'boolean' && Number.isFinite(value.savedAt) &&
+          value.savedAt <= Date.now() && Date.now() - value.savedAt < lifetime) return value;
+    } catch { /* Storage may be unavailable. Default to denied. */ }
+    return null;
+  };
+  let choice = read();
+  window.gtag('consent', 'default', signals({ analytics:false, marketing:false }));
+  if (choice) window.gtag('consent', 'update', signals(choice));
+  window.a2budConsent = {
+    get: () => choice,
+    save(analytics, marketing) {
+      choice = { version:1, analytics:!!analytics, marketing:!!marketing, savedAt:Date.now() };
+      window.gtag('consent', 'update', signals(choice));
+      let persisted = true;
+      try { localStorage.setItem(key, JSON.stringify(choice)); } catch { persisted = false; }
+      window.dispatchEvent(new CustomEvent('a2bud:consent', { detail:choice }));
+      return persisted;
+    },
+  };
+  window.addEventListener('storage', event => {
+    if (event.key !== key && event.key !== null) return;
+    choice = read();
+    window.gtag('consent', 'update', signals(choice || { analytics:false, marketing:false }));
+    window.dispatchEvent(new CustomEvent('a2bud:consent', { detail:choice }));
+  });
+})();
+</script>

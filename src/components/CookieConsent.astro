@@ -1,0 +1,145 @@
+<dialog id="cookie-dialog" class="consent" aria-labelledby="consent-title">
+  <header class="consent-header">
+    <img src="/img/logo/logo.png" width="1157" height="230" alt="A2BUD" />
+    <span></span>
+  </header>
+  <div class="consent-tabs" role="tablist" aria-label="Ustawienia prywatności">
+    <button id="consent-tab-overview" role="tab" aria-selected="true" aria-controls="consent-overview" type="button">Zgoda</button>
+    <button id="consent-tab-details" role="tab" aria-selected="false" aria-controls="consent-details" tabindex="-1" type="button">Szczegóły</button>
+    <button id="consent-tab-about" role="tab" aria-selected="false" aria-controls="consent-about" tabindex="-1" type="button">Informacje</button>
+  </div>
+  <div class="consent-body">
+    <section id="consent-overview" role="tabpanel" aria-labelledby="consent-tab-overview" tabindex="0">
+      <h2 id="consent-title">Ty decydujesz o swojej prywatności</h2>
+      <p>Możesz zaakceptować opcjonalną analitykę i marketing, odrzucić je lub wybrać kategorie. Odmowa nie ogranicza korzystania ze strony.</p>
+      <p>Obecnie nie korzystamy z narzędzi analitycznych ani reklamowych. Zapisujemy wyłącznie Twój wybór. Jeśli wdrożymy nowe narzędzia, zaktualizujemy informacje i ponownie poprosimy o decyzję.</p>
+    </section>
+    <section id="consent-details" role="tabpanel" aria-labelledby="consent-tab-details" tabindex="0" hidden>
+      <h2>Dostosuj swoje preferencje</h2>
+      <div class="consent-category"><div><h3>Niezbędne</h3><p>Zapis ustawień prywatności w tej przeglądarce przez 180 dni.</p></div><span class="consent-required">Zawsze aktywne</span></div>
+      <label class="consent-category"><span><strong>Analityka</strong><span class="consent-description">Pomiar odwiedzin i korzystania ze strony. Obecnie brak aktywnych narzędzi.</span></span><input id="consent-analytics" type="checkbox" role="switch" /></label>
+      <label class="consent-category"><span><strong>Marketing</strong><span class="consent-description">Reklamy, dane reklamowe i personalizacja. Obecnie brak aktywnych narzędzi.</span></span><input id="consent-marketing" type="checkbox" role="switch" /></label>
+    </section>
+    <section id="consent-about" role="tabpanel" aria-labelledby="consent-tab-about" tabindex="0" hidden>
+      <h2>Informacje o ustawieniach</h2>
+      <p>Wybór przechowujemy lokalnie w Twojej przeglądarce przez 180 dni. Możesz go zmienić lub wycofać w każdej chwili przez „Ustawienia cookies” w stopce.</p>
+      <p>Zgoda dotyczy tej przeglądarki i urządzenia. Usunięcie danych witryny spowoduje ponowne wyświetlenie okna. Wycofanie zgody nie wpływa na zgodność wcześniejszego przetwarzania.</p>
+      <a href="/polityka-prywatnosci/">Przeczytaj politykę prywatności ↗</a>
+    </section>
+  </div>
+  <div class="consent-note">Opcjonalne kategorie są domyślnie wyłączone.</div>
+  <div class="consent-actions">
+    <button type="button" data-consent="deny">Odrzuć opcjonalne</button>
+    <button type="button" data-consent="customize">Dostosuj <span aria-hidden="true">›</span></button>
+    <button type="button" data-consent="save" hidden>Zapisz wybór</button>
+    <button type="button" data-consent="accept">Akceptuj wszystkie</button>
+  </div>
+</dialog>
+<p id="consent-status" class="consent-status" role="status" hidden></p>
+
+<script is:inline>
+(() => {
+  const dialog = document.querySelector('#cookie-dialog');
+  const api = window.a2budConsent;
+  if (!dialog || !api) return;
+  const tabs = [...dialog.querySelectorAll('[role="tab"]')];
+  const analytics = dialog.querySelector('#consent-analytics');
+  const marketing = dialog.querySelector('#consent-marketing');
+  const customize = dialog.querySelector('[data-consent="customize"]');
+  const save = dialog.querySelector('[data-consent="save"]');
+  let previousOverflow = '';
+  function selectTab(index, focus = false) {
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === index));
+      tab.tabIndex = i === index ? 0 : -1;
+      document.getElementById(tab.getAttribute('aria-controls')).hidden = i !== index;
+    });
+    customize.hidden = index === 1;
+    save.hidden = index !== 1;
+    if (focus) tabs[index].focus();
+  }
+  function sync() {
+    const choice = api.get();
+    analytics.checked = choice?.analytics || false;
+    marketing.checked = choice?.marketing || false;
+  }
+  function open() {
+    if (dialog.open) return;
+    sync(); selectTab(0);
+    previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    dialog.showModal();
+  }
+  function choose(a, m) {
+    const persisted = api.save(a, m);
+    dialog.close();
+    const status = document.querySelector('#consent-status');
+    status.hidden = persisted;
+    status.textContent = persisted ? '' : 'Wybór zastosowano. Przeglądarka nie pozwoliła go zapisać — przy kolejnej wizycie zapytamy ponownie.';
+  }
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectTab(index));
+    tab.addEventListener('keydown', event => {
+      const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+      if (!keys.includes(event.key)) return;
+      event.preventDefault();
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? 2 : (index + (event.key === 'ArrowRight' ? 1 : 2)) % 3;
+      selectTab(next, true);
+    });
+  });
+  customize.addEventListener('click', () => selectTab(1, true));
+  save.addEventListener('click', () => choose(analytics.checked, marketing.checked));
+  dialog.querySelector('[data-consent="deny"]').addEventListener('click', () => choose(false, false));
+  dialog.querySelector('[data-consent="accept"]').addEventListener('click', () => choose(true, true));
+  dialog.addEventListener('cancel', event => {
+    event.preventDefault();
+    if (api.get()) dialog.close(); else choose(false, false);
+  });
+  dialog.addEventListener('close', () => { document.documentElement.style.overflow = previousOverflow; });
+  document.querySelectorAll('[data-cookie-open]').forEach(button => button.addEventListener('click', open));
+  window.addEventListener('a2bud:consent', sync);
+  // Keep the privacy policy readable without requiring a prior choice.
+  if (!api.get() && !location.pathname.startsWith('/polityka-prywatnosci')) open();
+})();
+</script>
+
+<style>
+  dialog.consent { width:min(920px,calc(100% - 32px)); max-width:780px; max-height:calc(100dvh - 32px); padding:0; border:0; border-radius:10px; background:#fff; color:var(--ink); box-shadow:0 28px 90px #0004; overflow:auto; overscroll-behavior:contain; }
+  .consent::backdrop { background:#13171a50; backdrop-filter:blur(3px); }
+  .consent-header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:26px; border-bottom:1px solid var(--line); }
+  .consent-header>span { color:var(--body); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; }
+  .consent-header img { width:145px; height:auto; }
+  .consent-tabs { display:grid; grid-template-columns:repeat(3,1fr); padding: 0 25px; border-bottom:1px solid var(--line); }
+  .consent-tabs button { border:0; border-bottom:3px solid transparent; background:white; padding:18px 8px; font-size:14px; font-weight:600; }
+  .consent-tabs button[aria-selected=true] { color:var(--accent); border-bottom-color:var(--accent); }
+  .consent-body { padding:26px; }
+  .consent h2 { font:700 18px/1.5 Manrope,sans-serif; letter-spacing:-.02em; margin:0 0 12px; }
+  .consent p { font-size:14px; line-height:1.8; margin:10px 0 0; }
+  .consent a { color:var(--accent-dark); text-decoration:underline; display:inline-block; margin-top:18px; font-size:14px; }
+  .consent-category { display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:22px; padding:18px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .consent-category h3,.consent-category strong { font:600 14px/1.5 Inter,sans-serif; letter-spacing:0; }
+  .consent-category p,.consent-description { display:block; color:var(--body); font-size:12px; line-height:1.7; font-weight:400; margin-top:6px; }
+  .consent-required { flex-shrink:0; color:var(--accent-dark); font-size:11px; }
+  .consent-category input { appearance:none; width:46px; height:26px; min-width:46px; padding:3px; margin:0; border:0; border-radius:20px; background:#737b84; cursor:pointer; }
+  .consent-category input::before { content:''; display:block; width:20px; height:20px; border-radius:50%; background:white; transition:transform .15s; }
+  .consent-category input:checked { background:var(--accent); }
+  .consent-category input:checked::before { transform:translateX(20px); }
+  .consent-note { padding:13px 26px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); color:var(--body); font-size:12px; }
+  .consent-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; padding:20px 26px 26px; }
+  .consent-actions button { padding:17px 10px; min-height:54px; border:1px solid var(--accent-dark); border-radius:4px; background:var(--accent-dark); color:white; font-size:13px; font-weight:600; }
+  .consent-actions button:hover { background:#0047a6; }
+  .consent-actions span { margin-left:12px; }
+  .consent button:focus-visible,.consent input:focus-visible { outline-offset:-4px; outline:2px solid var(--ink); }
+  .consent-status { position:fixed; bottom:16px; left:16px; right:16px; z-index:60; margin:0; padding:16px; background:white; border:1px solid var(--line); box-shadow:0 4px 24px #0002; }
+  @media(max-width:600px) {
+    .consent-header,.consent-body { padding:20px; }
+    .consent-header img { width:115px; }
+    .consent-header>span { font-size:9px; }
+    .consent-tabs button { font-size:12px; }
+    .consent-actions { grid-template-columns:1fr; padding:16px 20px 20px; gap:8px; }
+    .consent-actions button { min-height:46px; padding:12px; }
+    .consent-category { gap:14px; }
+    .consent-note { padding:12px 20px; }
+  }
+  @media(prefers-reduced-motion:reduce) { .consent-category input::before { transition:none; } }
+</style>
