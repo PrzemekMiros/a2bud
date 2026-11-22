@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+---
+<Layout title="Zarząd — A2BUD | Firma budowlana w Warszawie" description="Informacje o zarządzie A2BUD oraz sposobie prowadzenia i koordynowania realizacji budowlanych, remontowych i wykończeniowych.">
+  <section class="page-intro container">
+    <p class="eyebrow">A2BUD / ZARZĄD</p>
+    <h1><span class="heading-first-line">Decyzje, nadzór</span><br/>i kierunek działania</h1>
+    <p>Zarząd odpowiada za organizację firmy, rozwój usług oraz standard współpracy z klientami.</p>
+  </section>
+
+  <section class="section muted">
+    <div class="container about-grid">
+      <div>
+        <p class="eyebrow">ODPOWIEDZIALNOŚĆ</p>
+        <h2><span class="heading-first-line">Stabilne prowadzenie</span><br/>każdej realizacji</h2>
+        <p>Najważniejsze decyzje dotyczące zakresu, organizacji i standardu usług zapadają z myślą o sprawnym przebiegu inwestycji.</p>
+        <p>Priorytetem jest rzetelna komunikacja, przejrzyste ustalenia i dopasowanie rozwiązań do potrzeb klienta.</p>
+        <a class="text-link" href="/kontakt/">Skontaktuj się z A2BUD <span>↗</span></a>
+      </div>
+      <div class="management-card">
+        <span class="eyebrow">A2BUD</span>
+        <h2>Zarząd firmy</h2>
+        <p>Informacje szczegółowe o składzie zarządu mogą zostać uzupełnione po przekazaniu danych do publikacji.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <p class="eyebrow">KLUCZOWE OBSZARY</p>
+    <h2>Za co odpowiada zarząd</h2>
+    <div class="audience-grid">
+      {[
+        ['01', 'Kierunek rozwoju', 'Wyznaczanie zakresu usług i standardów obsługi klientów.'],
+        ['02', 'Nadzór organizacyjny', 'Dbanie o spójność ustaleń, terminów i komunikacji w ramach realizacji.'],
+        ['03', 'Relacje z klientami', 'Budowanie współpracy opartej na jasnych zasadach i odpowiedzialności.'],
+      ].map(([num, name, text]) => <article><span class="eyebrow">{num}</span><h3>{name}</h3><p>{text}</p></article>)}
+    </div>
+  </section>
+  <CTA/>
+</Layout>
+
+<style>
+  .management-card { background:linear-gradient(145deg,#13171a,#252b30); color:#fff; border-radius:24px; padding:32px; min-height:320px; display:flex; flex-direction:column; justify-content:flex-end; }
+  .management-card h2 { color:inherit; }
+  .management-card p { color:rgba(255,255,255,.72); }
+</style>

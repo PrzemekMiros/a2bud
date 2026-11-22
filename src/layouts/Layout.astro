@@ -5,7 +5,7 @@ import ConsentInit from '../components/ConsentInit.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 interface Props { title: string; description: string; }
 const { title, description } = Astro.props;
-const nav = [['/', 'Strona główna'], ['/o-nas/', 'O nas'], ['/uslugi/', 'Usługi'], ['/realizacje/', 'Realizacje'], ['/kontakt/', 'Kontakt']];
+const nav = [['/', 'Strona główna'], ['/o-nas/', 'O nas'], ['/zespol/', 'Zespół'], ['/zarzad/', 'Zarząd'], ['/uslugi/', 'Usługi'], ['/realizacje/', 'Realizacje'], ['/kontakt/', 'Kontakt']];
 const path = Astro.url.pathname;
 ---
 <!doctype html><html lang="pl"><head><ConsentInit/><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><meta name="theme-color" content="#13171A"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/><meta property="og:locale" content="pl_PL"/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/><title>{title}</title></head><body>

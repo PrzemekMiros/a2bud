@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+---
+<Layout title="Zespół — A2BUD | Firma budowlana w Warszawie" description="Poznaj zespół A2BUD odpowiedzialny za realizację prac budowlanych, remontowych i wykończeniowych w Warszawie i okolicach.">
+  <section class="page-intro container">
+    <p class="eyebrow">A2BUD / ZESPÓŁ</p>
+    <h1><span class="heading-first-line">Ludzie stojący</span><br/>za realizacją</h1>
+    <p>Łączymy doświadczenie wykonawcze, organizację prac i dbałość o detale na każdym etapie inwestycji.</p>
+  </section>
+
+  <section class="section muted">
+    <div class="container about-grid">
+      <div class="team-card team-card-featured">
+        <span class="eyebrow">WSPÓLNA PRACA</span>
+        <h2>Zespół dopasowany do zakresu inwestycji</h2>
+        <p>Przy każdym projekcie dobieramy osoby i specjalistów odpowiedzialnych za konkretne etapy prac — od przygotowania zakresu po końcowe wykończenie.</p>
+      </div>
+      <div>
+        <p class="eyebrow">JAK PRACUJEMY</p>
+        <h2><span class="heading-first-line">Porządek, komunikacja</span><br/>i odpowiedzialność</h2>
+        <p>Stawiamy na jasny podział zadań, bieżący kontakt i rozwiązania dopasowane do charakteru nieruchomości.</p>
+        <p>Dzięki temu prace budowlane, remontowe i wykończeniowe mogą być prowadzone w sposób spójny oraz przewidywalny dla klienta.</p>
+        <a class="text-link" href="/kontakt/">Porozmawiajmy o Twoim projekcie <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <p class="eyebrow">OBSZARY ODPOWIEDZIALNOŚCI</p>
+    <h2>Zespół w praktyce</h2>
+    <div class="audience-grid">
+      {[
+        ['01', 'Organizacja prac', 'Planowanie kolejnych etapów realizacji i koordynacja działań na inwestycji.'],
+        ['02', 'Wykonawstwo', 'Prace budowlane, remontowe i wykończeniowe dopasowane do ustalonego zakresu.'],
+        ['03', 'Kontakt z klientem', 'Bieżące omawianie ustaleń, zmian i decyzji ważnych dla przebiegu projektu.'],
+      ].map(([num, name, text]) => <article><span class="eyebrow">{num}</span><h3>{name}</h3><p>{text}</p></article>)}
+    </div>
+  </section>
+  <CTA/>
+</Layout>
+
+<style>
+  .team-card { background:#fff; border:1px solid var(--line); border-radius:24px; padding:32px; min-height:320px; display:flex; flex-direction:column; justify-content:flex-end; }
+  .team-card-featured { background:linear-gradient(145deg,#13171a,#252b30); color:#fff; }
+  .team-card h2 { color:inherit; }
+  .team-card p { color:rgba(255,255,255,.72); }
+</style>
