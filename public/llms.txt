@@ -1,0 +1,20 @@
+# A2BUD
+
+> Firma budowlana z Warszawy realizująca roboty budowlane, remonty i kompleksowe wykończenia wnętrz dla klientów indywidualnych oraz biznesowych.
+
+## Najważniejsze strony
+
+- [Usługi](https://a2bud.pl/uslugi/): pełny zakres usług A2BUD.
+- [Realizacje](https://a2bud.pl/realizacje/): galeria wykonanych prac.
+- [O firmie](https://a2bud.pl/o-nas/): informacje o podejściu i obszarze działania.
+- [Zespół](https://a2bud.pl/nasz-zespol/): osoby i kompetencje tworzące A2BUD.
+- [Kontakt i wycena](https://a2bud.pl/kontakt/): telefony, e-mail i formularz zapytania.
+- [Pełny opis dla modeli](https://a2bud.pl/llms-full.txt): rozszerzone informacje o firmie i usługach.
+
+## Kontakt
+
+- Obszar działania: Warszawa i okolice
+- Telefon: +48 792 698 858, +48 730 340 032
+- E-mail: biuro01.a2bud@gmail.com
+
+Treści i zdjęcia są chronione prawem autorskim. Cytowanie krótkich fragmentów z podaniem źródła jest dozwolone. Wykorzystanie do trenowania modeli AI nie jest dozwolone.

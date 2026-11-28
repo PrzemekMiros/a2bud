@@ -1233,5 +1233,89 @@ export const projects = [
         "height": 1200
       }
     ]
+  },
+  {
+    "title": "Posadzka żywiczna w domu",
+    "categories": [
+      "Posadzki i glazura",
+      "Mieszkania i domy"
+    ],
+    "description": "Jednolita posadzka żywiczna wykonana w otwartej strefie dziennej, kuchni i pozostałych pomieszczeniach domu.",
+    "images": [
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(7).jpeg", "alt": "Jasna posadzka żywiczna w otwartej strefie dziennej", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(1).jpeg", "alt": "Gładka jasna posadzka żywiczna przy betonowej ścianie", "width": 604, "height": 804 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(2).jpeg", "alt": "Posadzka żywiczna na piętrze domu", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(3).jpeg", "alt": "Ciemna posadzka żywiczna w jasnym pokoju", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(4).jpeg", "alt": "Jasna posadzka żywiczna przy drzwiach tarasowych", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(5).jpeg", "alt": "Ciemna posadzka żywiczna w pustym pomieszczeniu", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(8).jpeg", "alt": "Posadzka żywiczna przy białej zabudowie kuchennej", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20.jpeg", "alt": "Posadzka żywiczna łącząca kuchnię ze strefą dzienną", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21%20(2).jpeg", "alt": "Jasna posadzka żywiczna w korytarzu domu", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21%20(3).jpeg", "alt": "Posadzka żywiczna w otwartym wnętrzu z oświetleniem", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21%20(4).jpeg", "alt": "Gładka posadzka żywiczna przy dużym przeszkleniu", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21%20(7).jpeg", "alt": "Jasna posadzka żywiczna w kuchni i jadalni", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21.jpeg", "alt": "Posadzka żywiczna w przestronnym pokoju", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22.jpeg", "alt": "Ciemna posadzka żywiczna w pokoju z oknem", "width": 1536, "height": 2048 }
+    ]
+  },
+  {
+    "title": "Posadzka na zadaszonym tarasie",
+    "categories": [
+      "Posadzki i glazura",
+      "Mieszkania i domy"
+    ],
+    "description": "Odporna posadzka o dekoracyjnej, nakrapianej strukturze wykonana na zadaszonym tarasie.",
+    "images": [
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.19%20(1).jpeg", "alt": "Dekoracyjna posadzka na zadaszonym tarasie", "width": 850, "height": 917 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.19.jpeg", "alt": "Zbliżenie nakrapianej nawierzchni tarasu", "width": 848, "height": 1162 }
+    ]
+  },
+  {
+    "title": "Posadzki w garażach i pomieszczeniach technicznych",
+    "categories": [
+      "Posadzki i glazura",
+      "Mieszkania i domy"
+    ],
+    "description": "Wytrzymałe, łatwe w utrzymaniu posadzki żywiczne w garażach i zapleczach technicznych.",
+    "images": [
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21%20(1).jpeg", "alt": "Szara posadzka żywiczna w garażu", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.20%20(6).jpeg", "alt": "Posadzka żywiczna ze spadkiem przy odwodnieniu", "width": 604, "height": 804 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22%20(1).jpeg", "alt": "Jasnoszara posadzka w pomieszczeniu technicznym", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22%20(2).jpeg", "alt": "Nakrapiana posadzka żywiczna w garażu", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.23%20(4).jpeg", "alt": "Błyszcząca posadzka garażowa z oznaczeniami miejsc", "width": 800, "height": 500 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.23%20(5).jpeg", "alt": "Szara posadzka w garażu podziemnym", "width": 800, "height": 998 }
+    ]
+  },
+  {
+    "title": "Posadzki w ciągach komunikacyjnych",
+    "categories": [
+      "Posadzki i glazura",
+      "Biura i lokale usługowe"
+    ],
+    "description": "Gładkie posadzki żywiczne wykonane na balkonach, przejściach i w korytarzach obiektów użytkowych.",
+    "images": [
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21%20(6).jpeg", "alt": "Szara posadzka na zewnętrznym ciągu komunikacyjnym", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.21%20(5).jpeg", "alt": "Posadzka przy odwodnieniu liniowym na balkonie", "width": 604, "height": 804 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.23%20(6).jpeg", "alt": "Błyszcząca posadzka w długim korytarzu", "width": 1200, "height": 1600 }
+    ]
+  },
+  {
+    "title": "Posadzki przemysłowe w halach",
+    "categories": [
+      "Posadzki i glazura",
+      "Biura i lokale usługowe"
+    ],
+    "description": "Wielkopowierzchniowe posadzki żywiczne i przemysłowe w halach, magazynach oraz garażach podziemnych.",
+    "images": [
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.23.jpeg", "alt": "Błyszcząca posadzka przemysłowa w hali", "width": 2048, "height": 1536 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22%20(3).jpeg", "alt": "Szara posadzka w garażu wielostanowiskowym", "width": 1536, "height": 2048 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22%20(4).jpeg", "alt": "Wielkopowierzchniowa posadzka w hali magazynowej", "width": 570, "height": 295 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22%20(5).jpeg", "alt": "Nakrapiana posadzka przemysłowa w hali", "width": 910, "height": 512 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22%20(6).jpeg", "alt": "Dekoracyjna posadzka żywiczna w pomieszczeniu użytkowym", "width": 910, "height": 683 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.22%20(7).jpeg", "alt": "Jasna błyszcząca posadzka w hali przemysłowej", "width": 1632, "height": 1103 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.23%20(1).jpeg", "alt": "Mokra posadzka wielkopowierzchniowa podczas realizacji", "width": 2048, "height": 1536 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.23%20(2).jpeg", "alt": "Gotowa jasnoszara posadzka w hali", "width": 2048, "height": 1536 },
+      { "src": "/img/services/5/WhatsApp%20Image%202026-11-25%20at%2017.28.23%20(3).jpeg", "alt": "Zbliżenie antypoślizgowej struktury posadzki", "width": 339, "height": 339 }
+    ]
   }
 ];

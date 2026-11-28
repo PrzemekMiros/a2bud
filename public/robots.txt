@@ -1,0 +1,38 @@
+User-agent: *
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# AI search crawlers used to surface pages in assistant answers.
+User-agent: OAI-SearchBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: ChatGPT-User
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: Claude-SearchBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: Claude-User
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: PerplexityBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# Training-only crawlers are not granted permission.
+User-agent: GPTBot
+Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: ClaudeBot
+Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: Google-Extended
+Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Sitemap: https://a2bud.pl/sitemap.xml

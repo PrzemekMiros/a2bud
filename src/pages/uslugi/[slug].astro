@@ -2,9 +2,95 @@
 import Layout from '../../layouts/Layout.astro';
 import ServicePhoto from '../../components/ServicePhoto.astro';
 import CTA from '../../components/CTA.astro';
+import GalleryLightbox from '../../components/GalleryLightbox.astro';
 import { services } from '../../data/services';
-export function getStaticPaths() { return services.map((service, i) => ({ params: { slug: service.slug }, props: { service, i } })); }
+import { getServiceGallery } from '../../data/serviceGalleries';
+
+export function getStaticPaths() {
+  return services.map((service, i) => ({ params: { slug: service.slug }, props: { service, i } }));
+}
+
 const { service, i } = Astro.props;
 const related = [services[(i + 1) % services.length], services[(i + 2) % services.length]];
+const gallery = getServiceGallery(service.slug);
 ---
-<Layout title={`${service.name} Warszawa | A2BUD`} description={`${service.description} A2BUD — Warszawa i okolice. Skontaktuj się z nami i omów zakres prac.`}><section class="page-intro container"><a class="eyebrow" href="/uslugi/">← WSZYSTKIE USŁUGI / {String(i + 1).padStart(2, '0')}</a><h1>{service.name}</h1><p>{service.description}</p></section><section class="section muted"><div class="container about-grid"><ServicePhoto image={service.image} /><div><p class="eyebrow">WARSZAWA I OKOLICE</p><h2><span class="heading-first-line">Zakres, który odpowiada</span><br/>Twoim potrzebom</h2><p>{service.description}</p><h3>Zakres prac</h3><ul class="scope-list">{service.scope.map(item => <li>{item}</li>)}</ul><a class="button" href={`/kontakt/?usluga=${service.slug}`}>Zapytaj o wycenę <span>↗</span></a></div></div></section><section class="section container detail-bottom"><div><p class="eyebrow">KOMPLEKSOWA REALIZACJA</p><h2>Wszystko łączy się w całość</h2><p>{service.benefit}</p><p>Zakres oraz dobór rozwiązań ustalamy indywidualnie, uwzględniając stan nieruchomości i planowany sposób użytkowania.</p></div><div><h2 class="small-heading">Powiązane usługi</h2>{related.map(item => <a class="related-link" href={`/uslugi/${item.slug}/`}>{item.name}<span>↗</span></a>)}</div></section><CTA/></Layout>
+<Layout title={`${service.name} Warszawa | A2BUD`} description={`${service.description} A2BUD — Warszawa i okolice. Skontaktuj się z nami i omów zakres prac.`}>
+  <section class="page-intro container">
+    <a class="eyebrow" href="/uslugi/">← WSZYSTKIE USŁUGI / {String(i + 1).padStart(2, '0')}</a>
+    <h1>{service.name}</h1>
+    <p>{service.description}</p>
+  </section>
+
+  <section class="section muted">
+    <div class="container about-grid">
+      <ServicePhoto image={service.image} />
+      <div>
+        <p class="eyebrow">WARSZAWA I OKOLICE</p>
+        <h2><span class="heading-first-line">Zakres, który odpowiada</span><br/>Twoim potrzebom</h2>
+        <p>{service.description}</p>
+        <h3>Zakres prac</h3>
+        <ul class="scope-list">{service.scope.map(item => <li>{item}</li>)}</ul>
+        <a class="button" href={`/kontakt/?usluga=${service.slug}`}>Zapytaj o wycenę <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section service-gallery-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WYBRANE REALIZACJE</p>
+          <h2><span class="heading-first-line">Zobacz efekty</span><br/>naszej pracy</h2>
+        </div>
+        <p>{gallery.length} {gallery.length === 1 ? 'zdjęcie' : gallery.length < 5 ? 'zdjęcia' : 'zdjęć'} związanych z usługą: {service.name.toLowerCase()}.</p>
+      </div>
+      <div class="service-gallery">
+        {gallery.map(image => (
+          <a class="service-gallery-item" href={image.src} data-lightbox data-title={image.projectTitle} aria-haspopup="dialog" aria-label={`Powiększ zdjęcie: ${image.alt}`}>
+            <ServicePhoto image={image} />
+            <span class="gallery-caption">
+              <span>{image.projectTitle}</span>
+              <span aria-hidden="true">↗</span>
+            </span>
+          </a>
+        ))}
+      </div>
+      <a class="text-link gallery-all-link" href="/realizacje/">Zobacz wszystkie realizacje <span>→</span></a>
+    </div>
+  </section>
+
+  <section class="section container detail-bottom">
+    <div>
+      <p class="eyebrow">KOMPLEKSOWA REALIZACJA</p>
+      <h2>Wszystko łączy się w całość</h2>
+      <p>{service.benefit}</p>
+      <p>Zakres oraz dobór rozwiązań ustalamy indywidualnie, uwzględniając stan nieruchomości i planowany sposób użytkowania.</p>
+    </div>
+    <div>
+      <h2 class="small-heading">Powiązane usługi</h2>
+      {related.map(item => <a class="related-link" href={`/uslugi/${item.slug}/`}>{item.name}<span>↗</span></a>)}
+    </div>
+  </section>
+  <CTA/>
+  <GalleryLightbox/>
+</Layout>
+
+<style>
+  .service-gallery-section { border-bottom: 1px solid var(--line); }
+  .service-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .service-gallery-item { position: relative; display: block; min-width: 0; background: var(--ink); overflow: hidden; }
+  .service-gallery-item :global(.service-photo) { aspect-ratio: 1.28; border: 0; background: #dde0e1; }
+  .service-gallery-item :global(img) { transition: transform .45s cubic-bezier(.2,.7,.2,1), opacity .25s; }
+  .service-gallery-item:hover :global(img) { transform: scale(1.035); opacity: .88; }
+  .gallery-caption { position: absolute; inset: auto 0 0; display: flex; align-items: end; justify-content: space-between; gap: 18px; padding: 38px 18px 16px; color: white; background: linear-gradient(transparent, #11171bd9); font-size: 10px; line-height: 1.5; }
+  .gallery-caption > span:last-child { color: #72afff; font-size: 20px; }
+  .gallery-all-link { margin-top: 34px; }
+  @media (max-width: 850px) {
+    .service-gallery { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .service-gallery { grid-template-columns: 1fr; gap: 14px; }
+    .service-gallery-item :global(.service-photo) { aspect-ratio: 1.5; }
+    .gallery-caption { font-size: 11px; }
+  }
+</style>

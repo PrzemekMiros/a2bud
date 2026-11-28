@@ -1,0 +1,33 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "name": "A2BUD",
+    "url": "https://a2bud.pl/"
+  },
+  "entries": [
+    {
+      "id": "urn:air:a2bud.pl:web:services",
+      "displayName": "Usługi A2BUD",
+      "description": "Zakres usług budowlanych, remontowych i wykończeniowych w Warszawie i okolicach.",
+      "type": "text/html",
+      "url": "https://a2bud.pl/uslugi/",
+      "representativeQueries": ["Jakie usługi budowlane oferuje A2BUD?", "Czy A2BUD wykonuje remonty pod klucz?", "Firma remontowa Warszawa i okolice"]
+    },
+    {
+      "id": "urn:air:a2bud.pl:web:portfolio",
+      "displayName": "Realizacje A2BUD",
+      "description": "Galeria realizacji budowlanych, remontowych i wykończeniowych.",
+      "type": "text/html",
+      "url": "https://a2bud.pl/realizacje/",
+      "representativeQueries": ["Pokaż realizacje A2BUD", "Zdjęcia remontów A2BUD", "Przykłady posadzek i wykończeń"]
+    },
+    {
+      "id": "urn:air:a2bud.pl:web:contact",
+      "displayName": "Kontakt i wycena",
+      "description": "Dane kontaktowe i formularz przygotowujący zapytanie o wycenę.",
+      "type": "text/html",
+      "url": "https://a2bud.pl/kontakt/",
+      "representativeQueries": ["Jak skontaktować się z A2BUD?", "Poproś A2BUD o wycenę", "Numer telefonu A2BUD"]
+    }
+  ]
+}

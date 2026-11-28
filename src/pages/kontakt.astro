@@ -3,7 +3,84 @@ import Layout from '../layouts/Layout.astro';
 import ContactIcon from '../components/ContactIcon.astro';
 import { services } from '../data/services';
 ---
-<Layout title="Kontakt i wycena remontu — A2BUD Warszawa" description="Porozmawiajmy o Twojej inwestycji. A2BUD, Warszawa i okolice. Telefon 792 698 858 lub 730 340 032. E-mail: biuro01.a2bud@gmail.com."><section class="page-intro container"><p class="eyebrow">A2BUD / KONTAKT</p><h1><span class="heading-first-line">Porozmawiajmy</span><br/>o Twojej inwestycji</h1><p>Masz pomysł, projekt lub pytanie? Zróbmy pierwszy krok.</p></section><section class="section muted"><div class="container contact-grid"><aside><p class="eyebrow">JESTEŚMY DO TWOJEJ DYSPOZYCJI</p><h2><span class="heading-first-line">Dobry początek?</span><br/>Rozmowa</h2><div class="contact-block"><h3>Zadzwoń</h3><a href="tel:+48792698858"><ContactIcon name="phone" /><span>792 698 858</span></a><a href="tel:+48730340032"><ContactIcon name="phone" /><span>730 340 032</span></a></div><div class="contact-block"><h3>Napisz</h3><a class="email-link" href="mailto:biuro01.a2bud@gmail.com"><ContactIcon name="mail" /><span>biuro01.a2bud@gmail.com</span></a></div><div class="contact-block"><h3>Obszar działania</h3><p>Warszawa i okolice</p></div></aside><form id="contact-form"><h2>Opowiedz nam o swoich planach</h2><div class="form-grid"><label>Imię i nazwisko *<input name="name" autocomplete="name" required maxlength="120" placeholder="Jan Kowalski"/></label><label>Telefon *<input name="phone" type="tel" autocomplete="tel" required pattern="[+0-9\s()\-]{7,25}" title="Podaj numer telefonu (7–25 znaków: cyfry, spacje, +, nawiasy lub myślniki)." placeholder="Twój numer telefonu"/></label><label>E-mail *<input name="email" type="email" autocomplete="email" required maxlength="160" placeholder="twoj@email.pl"/></label><label>Rodzaj usługi *<select name="service" id="service" required><option value="">Wybierz usługę</option>{services.map(service => <option value={service.slug}>{service.name}</option>)}<option value="inne">Kilka usług / inny zakres</option></select></label><label class="full">Lokalizacja inwestycji *<input name="location" required maxlength="180" placeholder="Miejscowość lub dzielnica"/></label><label class="full">Opis planowanych prac *<textarea name="description" required minlength="20" maxlength="2500" rows="5" placeholder="Opisz przestrzeń i planowany zakres prac (min. 20 znaków)."></textarea></label><label class="full file-label">Załączniki (opcjonalnie)<input id="attachments" type="file" multiple accept="image/*,.pdf" aria-describedby="attachment-help"/></label></div><p class="form-note">* Pola wymagane. Dane wpisane do formularza pozostają w przeglądarce do chwili przekazania ich do programu pocztowego. <a href="/polityka-prywatnosci/">Informacje o prywatności</a>.</p><button class="button" type="submit">Wyślij zapytanie <span>↗</span></button><p id="form-status" role="status" aria-live="polite"></p><noscript>Włącz JavaScript, aby przygotować wiadomość, lub napisz bezpośrednio na biuro01.a2bud@gmail.com.</noscript></form></div></section></Layout>
+<Layout title="Kontakt i wycena remontu — A2BUD Warszawa" description="Porozmawiajmy o Twojej inwestycji. A2BUD, Warszawa i okolice. Telefon 792 698 858 lub 730 340 032. E-mail: biuro01.a2bud@gmail.com.">
+  <section class="page-intro contact-intro container">
+    <div class="contact-intro-copy">
+      <p class="eyebrow">A2BUD / KONTAKT</p>
+      <h1><span class="heading-first-line">Porozmawiajmy</span><br/>o Twojej inwestycji</h1>
+      <p>Masz pomysł, projekt lub pytanie? Zróbmy pierwszy krok.</p>
+    </div>
+    <svg class="contact-flow-lines" viewBox="0 0 1900 480" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="contact-line-rising" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#0069f3" stop-opacity="0" />
+          <stop offset=".42" stop-color="#0069f3" stop-opacity=".14" />
+          <stop offset=".76" stop-color="#72afff" stop-opacity=".44" />
+          <stop offset="1" stop-color="#0069f3" stop-opacity=".58" />
+        </linearGradient>
+        <linearGradient id="contact-line-flow" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#9fb3c8" stop-opacity="0" />
+          <stop offset=".34" stop-color="#9fb3c8" stop-opacity=".2" />
+          <stop offset=".76" stop-color="#0069f3" stop-opacity=".28" />
+          <stop offset="1" stop-color="#0069f3" stop-opacity=".5" />
+        </linearGradient>
+      </defs>
+      <path class="flow-line flow-line-rising" d="M-40 212H910C1005 212 1043 186 1084 116L1152-8" />
+      <path class="flow-line flow-line-flow" d="M-40 310H790C900 310 949 281 1000 231C1045 187 1084 180 1163 180H1540C1640 180 1704 223 1760 332" />
+      <path class="flow-line flow-line-fade" d="M1163 180H1940" />
+    </svg>
+  </section>
+  <section class="section muted">
+    <div class="container contact-grid">
+      <aside>
+        <p class="eyebrow">JESTEŚMY DO TWOJEJ DYSPOZYCJI</p>
+        <h2><span class="heading-first-line">Dobry początek?</span><br/>Rozmowa</h2>
+        <div class="contact-block">
+          <h3>Zadzwoń</h3>
+          <a href="tel:+48792698858"><ContactIcon name="phone" /><span>792 698 858</span></a>
+          <a href="tel:+48730340032"><ContactIcon name="phone" /><span>730 340 032</span></a>
+        </div>
+        <div class="contact-block">
+          <h3>Napisz</h3>
+          <a class="email-link" href="mailto:biuro01.a2bud@gmail.com"><ContactIcon name="mail" /><span>biuro01.a2bud@gmail.com</span></a>
+        </div>
+        <div class="contact-block">
+          <h3>Obszar działania</h3>
+          <p>Warszawa i okolice</p>
+        </div>
+        <div class="contact-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2444.5651406028405!2d21.13960477666265!3d52.21494957198312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ed25f3dea2e79%3A0x601227adf13e4071!2sFloks%C3%B3w%207%2C%2004-686%20Warszawa!5e0!3m2!1spl!2spl!4v1795867044723!5m2!1spl!2spl"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title="Mapa dojazdu do A2BUD, Floksów 7 w Warszawie"
+          ></iframe>
+        </div>
+      </aside>
+      <form id="contact-form" toolname="request_quote" tooldescription="Przygotuj zapytanie o wycenę usług budowlanych, remontowych lub wykończeniowych A2BUD.">
+        <h2>Opowiedz nam o swoich planach</h2>
+        <div class="form-grid">
+          <label>Imię i nazwisko *<input name="name" autocomplete="name" required maxlength="120" placeholder="Jan Kowalski" toolparamdescription="Imię i nazwisko osoby kontaktowej."/></label>
+          <label>Telefon *<input name="phone" type="tel" autocomplete="tel" required pattern="[+0-9\s()\-]{7,25}" title="Podaj numer telefonu (7–25 znaków: cyfry, spacje, +, nawiasy lub myślniki)." placeholder="Twój numer telefonu" toolparamdescription="Numer telefonu do kontaktu w sprawie wyceny."/></label>
+          <label>E-mail *<input name="email" type="email" autocomplete="email" required maxlength="160" placeholder="twoj@email.pl" toolparamdescription="Adres e-mail osoby pytającej o wycenę."/></label>
+          <label>Rodzaj usługi *<select name="service" id="service" required toolparamdescription="Rodzaj usługi, której dotyczy zapytanie."><option value="">Wybierz usługę</option>{services.map(service => <option value={service.slug}>{service.name}</option>)}<option value="inne">Kilka usług / inny zakres</option></select></label>
+          <label class="full">Lokalizacja inwestycji *<input name="location" required maxlength="180" placeholder="Miejscowość lub dzielnica" toolparamdescription="Miejscowość lub dzielnica planowanej inwestycji."/></label>
+          <label class="full">Opis planowanych prac *<textarea name="description" required minlength="20" maxlength="2500" rows="5" placeholder="Opisz przestrzeń i planowany zakres prac (min. 20 znaków)." toolparamdescription="Opis nieruchomości i planowanego zakresu prac."></textarea></label>
+          <label class="full file-label">Załączniki (opcjonalnie)<input id="attachments" type="file" multiple accept="image/*,.pdf" aria-describedby="attachment-help" toolparamdescription="Opcjonalne zdjęcia lub dokument PDF dotyczący inwestycji."/></label>
+        </div>
+        <p class="form-note">* Pola wymagane. Dane wpisane do formularza pozostają w przeglądarce do chwili przekazania ich do programu pocztowego. <a href="/polityka-prywatnosci/">Informacje o prywatności</a>.</p>
+        <button class="button" type="submit">Wyślij zapytanie <span>↗</span></button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+        <noscript>Włącz JavaScript, aby przygotować wiadomość, lub napisz bezpośrednio na biuro01.a2bud@gmail.com.</noscript>
+      </form>
+    </div>
+  </section>
+</Layout>
+
 <script>
 const form = document.querySelector<HTMLFormElement>('#contact-form');
 const select = document.querySelector<HTMLSelectElement>('#service');
@@ -13,6 +90,26 @@ form?.addEventListener('submit', event => { event.preventDefault(); if(!form.rep
 </script>
 
 <style>
+.contact-intro { display:flex; align-items:center; min-height:480px; position:relative; overflow:visible; isolation:isolate; }
+.contact-intro-copy { position:relative; z-index:2; width:min(68%,820px); padding:35px 54px 35px 0; }
+.contact-intro-copy>p:last-child { max-width:660px; font-size:15px; margin-bottom:0; }
+.contact-flow-lines { position:absolute; z-index:0; top:0; bottom:0; left:50%; width:100vw; height:100%; transform:translateX(-50%); overflow:visible; pointer-events:none; -webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 48%,#000 62%,#000 100%); mask-image:linear-gradient(90deg,transparent 0%,transparent 48%,#000 62%,#000 100%); }
+.flow-line { fill:none; vector-effect:non-scaling-stroke; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
+.flow-line-rising { stroke:url(#contact-line-rising); }
+.flow-line-flow { stroke:url(#contact-line-flow); }
+.flow-line-fade { stroke:#13171a; opacity:.06; }
 .contact-block a { display:flex; align-items:center; gap:12px; }
 .contact-block a span { min-width:0; overflow-wrap:anywhere; }
+.contact-map { width:100%; margin-top:28px; overflow:hidden; border:1px solid var(--line); background:#e9ebeb; aspect-ratio:4/3; }
+.contact-map iframe { display:block; width:100%; height:100%; }
+@media(max-width:850px) {
+  .contact-intro { min-height:410px; }
+  .contact-intro-copy { width:76%; }
+}
+@media(max-width:600px) {
+  .contact-intro { padding-block:48px 78px; min-height:390px; align-items:start; }
+  .contact-intro-copy { width:100%; padding:0 0 28px; }
+  .contact-flow-lines { height:62%; top:auto; bottom:0; width:150vw; -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 48%,#000 100%); mask-image:linear-gradient(180deg,transparent 0%,#000 48%,#000 100%); }
+  .flow-line { stroke-width:1.05; }
+}
 </style>
